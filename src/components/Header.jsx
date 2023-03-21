@@ -5,25 +5,13 @@ const Header = () => {
     const themeToggleDarkIcon = useRef(null);
     const handleToogleBtn = () => {
         themeToggleLightIcon.current.classList.toggle('hidden');
-        themeToggleDarkIcon.current.classList.toggle('hidden');
-        const colorTheme = localStorage.getItem('color-theme') || false;
-        if(colorTheme){
-            if(colorTheme === 'light'){
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('color-theme', 'dark');
-            }else{
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('color-theme', 'light');
-            }
-        }else{
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('color-theme', 'light');
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('color-theme', 'dark');
-            }
-        }
+    themeToggleDarkIcon.current.classList.toggle('hidden');
+  
+    const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('color-theme', newTheme);
     }
 
     return (
